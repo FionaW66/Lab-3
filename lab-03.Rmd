@@ -31,12 +31,32 @@ nobel_living = nobel %>%
 
 This new data frame has `r nrow(nobel_living)` rows.   
 
-### Exercise 3
+Next, we create a new variable: country_us.
 
-Remove this text, and add your answer for Exercise 1 here.
-Add code chunks as needed.
-Don't forget to label your code chunk.
-Do not use spaces in code chunk labels.
+```{r country_us}
+nobel_living <- nobel_living %>% 
+  mutate(
+    country_us = if_else(country == "USA", "USA", "Other")
+  )
+```
+
+We will limit our analysis to only Physics, Medicine, Chemistry, and Economics. 
+```{r limit_categories}
+nobel_living_science <- nobel_living %>% 
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics"))
+```
+
+It's interesting that we still have `r nrow(nobel_living_science)` observations. 
+
+### Exercise 3
+```{r bar_plot}
+nobel_living_science %>% 
+  ggplot(mapping = aes(y = country_us, color=category, fill = category)) + 
+  geom_bar() + facet_wrap(~category, nrow = 2) + 
+  labs(title = "Born in the U.S vs. Others", subtitle = "by category")
+```
+
+According to the visualization, I do observe that more Nobel laureate were based in the U.S. when they won the Nobel prize for all four categories. This is more true for Economics than other categories. I would conclude that the visualization supports Buzzfeed headline, but I can't be sure whether the difference between the bars is significant. 
 
 ### Exercise 4
 
