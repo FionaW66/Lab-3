@@ -69,11 +69,39 @@ can’t be sure whether the difference between the bars is significant.
 
 ### Exercise 4
 
-…
+``` r
+nobel_living_science <- nobel_living_science %>% 
+  mutate(
+    born_country_us = if_else(born_country == "USA", "USA", "Other")
+  )
+nobel_living_science %>% 
+  count(born_country_us)
+```
+
+    ## # A tibble: 2 × 2
+    ##   born_country_us     n
+    ##   <chr>           <int>
+    ## 1 Other             123
+    ## 2 USA               105
+
+Of the 228 winners, there are 105 that were born in the U.S.
 
 ### Exercise 5
 
-…
+``` r
+nobel_living_science %>% 
+  ggplot(mapping = aes(x = country_us, fill = born_country_us)) + 
+  geom_bar() + facet_wrap(~category, ncol = 2) + 
+  labs(title = "Based vs. Born", subtitle = "by category")
+```
+
+![](lab-03_files/figure-gfm/born_base_us-1.png)<!-- -->
+
+Of those US-based Nobel winners, there are actually more US born
+winners. We are looking at the bars that say USA (on the right of each
+facet). There are more area of blue (born in USA), so this data do NOT
+support Buzzfeed’s claim, acknolwedging that we cannot conduct
+significance testing.
 
 ### Exercise 6
 
