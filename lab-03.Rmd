@@ -78,8 +78,14 @@ nobel_living_science %>%
   labs(title = "Based vs. Born", subtitle = "by category")
 ```
 
-Of those US-based Nobel winners, there are actually more US born winners. We are looking at the bars that say USA (on the right of each facet). There are more area of blue (born in USA), so this data do NOT support Buzzfeed's claim, acknolwedging that we cannot conduct significance testing.
+Of those US-based Nobel winners, many were born in other countries. This statement is true, although I would say "some were born in other countries". There are actually more US born winners. We are looking at the bars that say USA (on the right of each facet). There are more area of blue (born in USA).
 
 ### Exercise 6
+```{r Other_origin}
+nobel_living_science %>% 
+  filter(country_us == "USA" & born_country_us == "Other") %>% 
+  count(born_country) %>% 
+  arrange(desc(n))
+```
 
-...
+Germany and United Kingdom are the most common, each has 7 instances, followed by China, 5 instances. 
