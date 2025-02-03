@@ -1,7 +1,7 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Fiona Wang
+2025-02-03
 
 ### Load packages and data
 
